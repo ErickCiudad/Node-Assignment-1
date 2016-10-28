@@ -9,49 +9,49 @@ var app = express();
 
 app.use(morgan('dev'));
 
-var promoRouter = express.Router();
+var leaderRouter = express.Router();
 
-promoRouter.use(bodyParser.json());
+leaderRouter.use(bodyParser.json());
 
-promoRouter.route('/')
+leaderRouter.route('/')
 .all(function(req,res,next) {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       next();
 })
 
 .get(function(req,res,next){
-        res.end('Will send all the promos to you!');
+        res.end('Will send all the leaders to you!');
 })
 
 .post(function(req, res, next){
-    res.end('Will add the promo: ' + req.body.name + ' with details: ' + req.body.description);
+    res.end('Will add the leader: ' + req.body.name + ' with details: ' + req.body.description);
 })
 
 .delete(function(req, res, next){
-        res.end('Deleting all promos');
+        res.end('Deleting all leaders');
 });
 
-promoRouter.route('/:promoId')
+leaderRouter.route('/:leaderId')
 .all(function(req,res,next) {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       next();
 })
 
 .get(function(req,res,next){
-        res.end('Will send details of the promo: ' + req.params.promoId +' to you!');
+        res.end('Will send details of the leader: ' + req.params.leaderId +' to you!');
 })
 
 .put(function(req, res, next){
-        res.write('Updating the promo: ' + req.params.promoId + '\n');
-    res.end('Will update the promo: ' + req.body.name +
+        res.write('Updating the leader: ' + req.params.leaderId + '\n');
+    res.end('Will update the leader: ' + req.body.name +
             ' with details: ' + req.body.description);
 })
 
 .delete(function(req, res, next){
-        res.end('Deleting promo: ' + req.params.promoId);
+        res.end('Deleting leader: ' + req.params.leaderId);
 });
 
-app.use('/promos',promoRouter);
+app.use('/leaders',leaderRouter);
 
 app.use(express.static(__dirname + '/public'));
 
